@@ -9,7 +9,7 @@ public class Biblioteca {
 
 	public Biblioteca() {
 		socios = new ArrayList<>();
-		exporter= new JacksonAdapter(); //new JSONSimpleAdapter;
+		exporter= new VoorheesExporter(); 
 	}
 
 	public void agregarSocio(Socio socio) {
