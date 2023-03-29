@@ -2,22 +2,30 @@ package ar.edu.unlp.info.oo2.ejercicio5_filesystem;
 
 import java.time.LocalDate;
 
-public abstract class Estructura {
+public abstract class Estructura{
 	private String nombre;
 	private LocalDate fecha;
-	private int tamaño;
+	private int tamano;
 	
-	
-	public Estructura(String nombre, LocalDate fecha, int tamaño) {
+	public Estructura(String nombre, LocalDate fecha, int tamano) {
 		this.nombre = nombre;
 		this.fecha = fecha;
-		this.tamaño = tamaño;
+		this.tamano = tamano;
 	}
 	
-	
-	public int tamañoTotalOcupado() {
-		return this.tamaño;
+	public String getNombre() {
+		return this.nombre;
 	}
 	
-
+	public LocalDate getFecha() {
+		return this.fecha;
+	}
+	
+	public int tamanoTotalOcupado() {
+		return this.tamano;
+	}
+	
+    public abstract Archivo archivoMasGrande(); 
+    
+    public abstract Archivo archivoMasNuevo();
 }
