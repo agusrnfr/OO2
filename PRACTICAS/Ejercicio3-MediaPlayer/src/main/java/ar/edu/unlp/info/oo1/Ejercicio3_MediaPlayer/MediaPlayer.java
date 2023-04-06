@@ -1,4 +1,4 @@
-package ar.edu.unlp.info.oo1.Ejercicio3_MediaPlayer;
+package ar.edu.unlp.info.oo1.ejercicio3_MediaPlayer;
 
 public class MediaPlayer {
 	private Media media;
