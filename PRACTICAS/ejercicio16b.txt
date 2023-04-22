@@ -1,0 +1,10 @@
+El Factory Method debe ser capaz de leer y analizar el archivo JSON para determinar qué tipo de producto se debe crear. 
+Esto implica la necesidad de tener una lógica de parseo y validación de JSON, lo que puede aumentar la complejidad del código. Para ello, es posible que 
+se necesite una herramienta o biblioteca externa para manejar el parseo y validación del archivo JSON,  lo que puede introducir dependencias adicionales 
+en la solución.
+Ademas, la estructura del archivo JSON debe ser diseñada de tal manera que contenga toda la información necesaria para crear el 
+producto deseado. Esto puede requerir que se definan campos adicionales en el archivo JSON para contener información específica del 
+tipo de producto que se está creando.
+En general, utilizar el patrón Factory Method con especificaciones en formato JSON puede ser una solución flexible y escalable, siempre 
+y cuando se tenga en cuenta la complejidad adicional que puede introducir el parseo y validación de JSON, así como la necesidad de diseñar 
+el formato del archivo JSON de manera efectiva para contener toda la información necesaria para crear el producto.
