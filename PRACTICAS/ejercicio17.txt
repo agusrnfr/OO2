@@ -1,0 +1,8 @@
+El patrón Builder facilitaría la necesidad de expansión de la empresa en la etapa de construcción de los micro procesos con descripción de hardware 
+en formato JSON. Se utilizaría para crear diferentes objetos que representen los diferentes proveedores de infraestructura en la nube 
+y sus configuraciones específicas, como la cantidad de CPU, RAM, disco, entre otros. Cada objeto Builder podría definir sus propios parámetros y 
+opciones de configuración específicas para el proveedor de infraestructura en la nube correspondiente.
+Podría ser utilizado conjuntamente con el patrón Strategy, para mejorar la modularidad y flexibilidad del sistema.
+
+El patrón Builder es más adecuado para crear objetos complejos con diferentes combinaciones de configuraciones y parámetros (este caso), el patrón Factory 
+Method es más adecuado para crear diferentes variantes de objetos o cuando se espera que haya diferentes tipos de objetos que deben ser creados.
