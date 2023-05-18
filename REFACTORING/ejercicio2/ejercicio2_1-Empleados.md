@@ -328,7 +328,7 @@ public class EmpleadoPlanta {
 	
 }
 ```
-1. **Mal Olor**: No se provee un constructor para inicializar los atributos de las clases en donde seria mejor que este inicializado el **"sueldoBasico**" en 0 (y **"cantidadHijos**" y **"horasTrabajadas**" en sus respectivas clases) _(no se si es un code smell no tener un constructor o simplemente es una mejor practica tenerlo)_
+1. **Mal Olor**: No se provee un constructor para inicializar los atributos de las clases en donde seria mejor que este inicializado el **"sueldoBasico**" en 0 (y **"cantidadHijos**" y **"horasTrabajadas**" en sus respectivas clases)
 
 2. **Refactoring**: -
 
@@ -338,7 +338,7 @@ public class EmpleadoPlanta {
 public class EmpleadoPasante {
     private String nombre;
     private String apellido;
-    private double sueldoBasico
+    private double sueldoBasico;
     
     
     public EmpleadoPasante(String nombre, String apellido) {
@@ -377,8 +377,12 @@ public class EmpleadoPasante {
 }
 
 public class EmpleadoTemporario  {
-	private String nombre;
-	private String apellido;
+    private String nombre;
+    private String apellido;
+    private double sueldoBasico;
+	private double horasTrabajadas;
+	private int cantidadHijos;
+
 
 	public EmpleadoTemporario(String nombre, String apellido) {
 		this.nombre = nombre;
@@ -438,6 +442,8 @@ public class EmpleadoTemporario  {
 public class EmpleadoPlanta  {
 	private String nombre;
 	private String apellido;
+	private double sueldoBasico;
+	private int cantidadHijos;
 	
 	public EmpleadoPlanta(String nombre, String apellido) {
 		this.nombre = nombre;
@@ -487,8 +493,6 @@ public class EmpleadoPlanta  {
 
 ```
 
-
-
 1. **Mal Olor**: Clases **"EmpleadoPasante"**, **"EmpleadoPlanta"** y **"EmpleadoTemporario"** con métodos y campos parecidos.
 
 2. **Refactoring**: Extract Superclass
@@ -503,6 +507,7 @@ public abstract class Empleado {
 
 	protected String nombre;
 	protected String apellido;
+	protected double sueldoBasico;
 
     public Empleado(String nombre, String apellido) {
 		this.nombre = nombre;
@@ -606,8 +611,121 @@ public class EmpleadoPlanta extends Empleado{
 	
 }
 ```
+1. **Mal Olor**: El valor de los campos nombre y apellido debe establecerse solo cuando se crea
 
-1. **Mal Olor**: Clases **"EmpleadoPasante"**, **"EmpleadoPlanta"** y **"EmpleadoTemporario"** con campo **"cantidadHijos"** parecido.
+2. **Refactoring**: Remove Setting Method
+   1. El valor de un campo debe poder cambiarse solo en el constructor. Si el constructor no contiene un parámetro para establecer el valor, agregue uno. 
+   2. Encuentra todas las llamadas de setter.
+      1. Si una llamada de setter se encuentra justo después de una llamada para el constructor de la clase actual, mueva su argumento a la llamada del constructor y elimine el setter. 
+      2. Reemplace las llamadas de setter en el constructor con acceso directo al campo.
+   3. Eliminar el setter.
+
+3. **Resultado**:
+
+```java
+public abstract class Empleado {
+
+	protected String nombre;
+	protected String apellido;
+	protected double sueldoBasico;
+
+    public Empleado(String nombre, String apellido) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.sueldoBasico = 0;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public double getSueldoBasico() {
+		return sueldoBasico;
+	}
+
+	public void setSueldoBasico(double sueldoBasico) {
+		this.sueldoBasico = sueldoBasico;
+	}
+	
+	public abstract double calcularSueldo();
+
+
+}
+
+public class EmpleadoPasante extends Empleado{
+	
+    public EmpleadoPasante(String nombre, String apellido) {
+		super(nombre, apellido);
+	}
+
+	public double calcularSueldo() {
+        return this.sueldoBasico - (this.sueldoBasico * 0.13);
+    }
+}
+
+public class EmpleadoTemporario extends Empleado{
+	private double horasTrabajadas;
+	private int cantidadHijos;
+
+	public EmpleadoTemporario(String nombre, String apellido) {
+		super(nombre,apellido);
+		this.horasTrabajadas = 0;
+		this.cantidadHijos = 0;
+	}
+
+	public double calcularSueldo() {
+    	return this.sueldoBasico + (this.horasTrabajadas * 500)  + (this.cantidadHijos * 1000) - (this.sueldoBasico * 0.13);
+    	  
+	}
+
+	public double getHorasTrabajadas() {
+		return horasTrabajadas;
+	}
+
+	public void setHorasTrabajadas(double horasTrabajadas) {
+		this.horasTrabajadas = horasTrabajadas;
+	}
+
+	public int getCantidadHijos() {
+		return cantidadHijos;
+	}
+
+	public void setCantidadHijos(int cantidadHijos) {
+		this.cantidadHijos = cantidadHijos;
+	}
+
+}
+
+public class EmpleadoPlanta extends Empleado{
+	private int cantidadHijos;
+	
+    public EmpleadoPlanta(String nombre, String apellido) {
+		super(nombre, apellido);
+		this.cantidadHijos = 0;
+	}
+
+	public double calcularSueldo() {
+		return this.sueldoBasico + (this.cantidadHijos * 2000) - (this.sueldoBasico * 0.13);
+	}
+
+	public int getCantidadHijos() {
+		return cantidadHijos;
+	}
+
+	public void setCantidadHijos(int cantidadHijos) {
+		this.cantidadHijos = cantidadHijos;
+	}
+	
+	
+}
+```
+
+
+1. **Mal Olor**: Clases **"EmpleadoPlanta"** y **"EmpleadoTemporario"** con campo **"cantidadHijos"**.
 
 2. **Refactoring**: Extract Superclass
 

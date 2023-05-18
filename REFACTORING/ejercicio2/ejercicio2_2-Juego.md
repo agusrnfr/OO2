@@ -170,7 +170,7 @@ public class Jugador {
 }
 ```
 
-1. **Mal Olor**: No se provee un constructor para inicializar los atributos de las clases en donde seria mejor que este inicializado el **"puntuacion**" en 0 _(no se si es un code smell no tener un constructor o simplemente es una mejor practica tenerlo)_
+1. **Mal Olor**: No se provee un constructor para inicializar los atributos de las clases en donde seria mejor que este inicializado el **"puntuacion**" en 0
 
 2. **Refactoring**: -
 
@@ -214,6 +214,67 @@ public class Jugador {
 	public int getPuntuacion() {
 		return puntuacion;
 	}
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+	
+    public void incrementarPuntuacion() {
+        this.puntuacion += 100;
+    }
+    
+    public void decrementarPuntuacion() {
+    	this.puntuacion -= 50;
+    }
+
+}
+```
+
+1. **Mal Olor**: El valor de los campos nombre y apellido debe establecerse solo cuando se crea
+
+2. **Refactoring**: Remove Setting Method
+   1. El valor de un campo debe poder cambiarse solo en el constructor. Si el constructor no contiene un parámetro para establecer el valor, agregue uno. 
+   2. Encuentra todas las llamadas de setter.
+      1. Si una llamada de setter se encuentra justo después de una llamada para el constructor de la clase actual, mueva su argumento a la llamada del constructor y elimine el setter. 
+      2. Reemplace las llamadas de setter en el constructor con acceso directo al campo.
+   3. Eliminar el setter.
+
+3. **Resultado**:
+
+```java
+public class Juego {
+	
+    public void incrementarPuntuacion(Jugador j) {
+        j.incrementarPuntuacion();
+    }
+    
+    public void decrementarPuntuacion(Jugador j) {
+        j.decrementarPuntuacion();
+    }
+}
+
+public class Jugador {
+	private String nombre;
+    private String apellido;
+    private int puntuacion;
+    
+	public Jugador(String nombre, String apellido) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.puntuacion = 0;
+	}
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public String getApellido() {
+		return apellido;
+	}
+
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+	
 	public void setPuntuacion(int puntuacion) {
 		this.puntuacion = puntuacion;
 	}
