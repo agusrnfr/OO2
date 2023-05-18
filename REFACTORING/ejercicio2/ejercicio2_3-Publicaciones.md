@@ -238,7 +238,7 @@ public class Post {
 	}
 	
 	public boolean esPostDeOtroUsuario(Usuario usuario) {
-		return this.getUsuario().equals(usuario);
+		return !this.getUsuario().equals(usuario);
 	}
 	
 	
