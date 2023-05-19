@@ -44,7 +44,7 @@ public class Pelicula {
 }
 ```
 
-1. **Mal Olor**: El método **"calcularCostoPelicula()"** de la clase **"Usuario"** tiene un Switch Statement que podría ser reemplazado por Polimorfismo. (Switch Statements).
+1. **Mal Olor**: El método **"calcularCostoPelicula()"** de la clase **"Usuario"** tiene un Switch Statement que podría ser reemplazado por Strategy
 
 2. **Refactoring**: Replace Conditional Logic with Strategy (no se puede aplicar Replace Conditional Logic with Polymorphism porque no se pueden crear subclases ya que se puede cambiar de una subscripción a otra, usar Replace Conditional Logic with Polymorphism implicaría crear un objeto desde 0 si se cambia de subscripción).
    1. Crear una clase Strategy
