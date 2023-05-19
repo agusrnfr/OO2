@@ -34,7 +34,7 @@ return this.items.stream().mapToDouble(item -> item.getProducto().getPrecio() * 
 }
 ```
 
-1. **Mal Olor**: El método total() de la clase Carrito tiene un nivel de abstracción incorrecto. El método total() debería delegar la responsabilidad de calcular el total a la clase ItemCarrito. La responsabilidad esta mal asignada. (Feature Envy y Data Class)
+1. **Mal Olor**: El método **"total()**" de la clase Carrito tiene un nivel de abstracción incorrecto. El método **"total()"** debería delegar la responsabilidad de calcular el total a la clase **"ItemCarrito"**. La responsabilidad esta mal asignada. (Feature Envy y Data Class)
 
 2. **Refactoring**: Extract Method y Move Method
 

@@ -2,7 +2,7 @@ package ar.edu.unlp.info.oo2.ejercicio2_1_Empleados;
 
 public class EmpleadoPasante extends Empleado{
 	
-    public EmpleadoPasante(String nombre, String apellido, double sueldoBasico) {
+    public EmpleadoPasante(String nombre, String apellido) {
 		super(nombre, apellido);
 	}
 

@@ -102,7 +102,7 @@ public class PostApp {
 }
 ```
 
-1. **Mal Olor**: Reinventar la rueda en vez de utilizar las herramientas que nos brinda el lenguaje. Esto sucede en el método **ordenarPostsPorFecha()** ya que se esta implementando un algoritmo de ordenamiento cuando podría usar **"stream()"**. También sucede en el método **obtenerUltimosNPosts()** ya que se esta implementando un algoritmo para obtener los ultimos que se podría hacer haciendo uso de **"stream()"**
+1. **Mal Olor**: Reinventar la rueda en vez de utilizar las herramientas que nos brinda el lenguaje. Esto sucede en el método **"ordenarPostsPorFecha()"** ya que se esta implementando un algoritmo de ordenamiento cuando podría usar **"stream()"**. También sucede en el método **"obtenerUltimosNPosts()"** ya que se esta implementando un algoritmo para obtener los ultimos que se podría hacer haciendo uso de **"stream()"**
 
 2. **Refactoring**: Replace Loop with Pipeline
    1. Identificar el bucle existente: Localiza el bucle en tu código que realiza la iteración sobre una colección de elementos.
@@ -145,7 +145,7 @@ public class PostApp {
 }
 ```
 
-1. **Mal Olor**: Responsabilidad mal asignada. El método **ultimosPostsQueNoPertenecenAUsuario()** la verificación de que el usuario no sea el dueño del post, cuando debería ser responsabilidad de la clase **"Post"**. (Feature Envy y Data Class) 
+1. **Mal Olor**: Responsabilidad mal asignada. El método **"ultimosPostsQueNoPertenecenAUsuario()"** la verificación de que el usuario no sea el dueño del post, cuando debería ser responsabilidad de la clase **"Post"**. (Feature Envy y Data Class) 
 
 2.  **Refactoring**: Extract Method y Move Method
 
