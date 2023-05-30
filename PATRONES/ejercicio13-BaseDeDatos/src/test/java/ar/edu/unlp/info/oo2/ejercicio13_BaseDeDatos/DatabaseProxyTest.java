@@ -24,8 +24,8 @@ public class DatabaseProxyTest {
 		assertEquals("access denied",exceptionPending.getMessage());
 
 		this.proxy.logIn();
-        assertEquals(Arrays.asList("Spiderman", "Marvel"), this.database.getSearchResults("select * from comics where id=1"));
-        assertEquals(Collections.emptyList(), this.database.getSearchResults("select * from comics where id=10"));
+        assertEquals(Arrays.asList("Spiderman", "Marvel"), this.proxy.getSearchResults("select * from comics where id=1"));
+        assertEquals(Collections.emptyList(), this.proxy.getSearchResults("select * from comics where id=10"));
         
         this.proxy.closeSession();
         Exception exceptionPending2 = assertThrows(RuntimeException.class, () -> {this.proxy.getSearchResults("select * from comics where id=10");});
@@ -38,8 +38,8 @@ public class DatabaseProxyTest {
 		assertEquals("access denied",exceptionPending.getMessage());
 		
 		this.proxy.logIn();
-		assertEquals(3, this.database.insertNewRow(Arrays.asList("Patoruzú", "La flor")));
-        assertEquals(Arrays.asList("Patoruzú", "La flor"), this.database.getSearchResults("select * from comics where id=3"));
+		assertEquals(3, this.proxy.insertNewRow(Arrays.asList("Patoruzú", "La flor")));
+        assertEquals(Arrays.asList("Patoruzú", "La flor"), this.proxy.getSearchResults("select * from comics where id=3"));
         
         this.proxy.closeSession();
         Exception exceptionPending2 = assertThrows(RuntimeException.class, () -> {this.proxy.insertNewRow(Arrays.asList("Patoruzú", "La flor"));});
