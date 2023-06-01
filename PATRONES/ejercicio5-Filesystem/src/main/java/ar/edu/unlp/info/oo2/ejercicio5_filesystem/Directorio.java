@@ -5,31 +5,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Directorio extends Archivo {
-	private List<Archivo> contenido;
+public class Directorio extends FileSystem {
+	private List<FileSystem> files;
 
 	public Directorio(String nombre, LocalDate fecha) {
-		super(nombre, fecha, 32);
-		this.contenido = new ArrayList<>();
+		super(nombre, fecha);
+		this.files = new ArrayList<>();
 	}
 	
-	public void agregar(Archivo archivo) {
-		this.contenido.add(archivo);	
+	public void agregar(FileSystem archivo) {
+		this.files.add(archivo);	
 	}
 	
 	@Override
 	public int tamanoTotalOcupado() {
-		return super.tamanoTotalOcupado() + this.contenido.stream().mapToInt(estructura -> estructura.tamanoTotalOcupado()).sum();
+		return (this.files.stream().mapToInt(file -> file.tamanoTotalOcupado()).sum()) + 32;
 	}
 	
 	
 	@Override
     public Archivo archivoMasGrande() {
-    	return this.contenido.stream().map(estructura -> estructura.archivoMasGrande()).max((a1,a2) -> Integer.compare(a1.archivoMasGrande().tamanoTotalOcupado(),a2.archivoMasGrande().tamanoTotalOcupado())).orElse(null);	
+    	return this.files.stream().map(file -> file.archivoMasGrande()).max((a1,a2) -> Integer.compare(a1.tamanoTotalOcupado(),a2.tamanoTotalOcupado())).orElse(null);	
     }
     
 	@Override
     public Archivo archivoMasNuevo() {
-		return this.contenido.stream().map(estructura -> estructura.archivoMasNuevo()).max((a1,a2) -> a1.archivoMasNuevo().getFecha().compareTo(a2.archivoMasNuevo().getFecha())).orElse(null);
+		return this.files.stream().map(file -> file.archivoMasNuevo()).max((a1,a2) -> a1.getFecha().compareTo(a2.getFecha())).orElse(null);
     }
 }
