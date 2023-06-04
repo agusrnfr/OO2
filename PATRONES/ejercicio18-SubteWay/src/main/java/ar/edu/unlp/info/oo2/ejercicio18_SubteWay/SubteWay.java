@@ -8,6 +8,7 @@ public class SubteWay {
 	}
 
 	public void hacerSandwich() {
+		this.constructor.reset();
 		this.constructor.agregarPan();
 		this.constructor.agregarAderezo();
 		this.constructor.agregarPrincipal();
