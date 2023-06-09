@@ -1,0 +1,94 @@
+/*
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Llamada {
+-numeroDeEmisor: String
+-numeroDeRemitente: String
+-duracion: Integer
++<<create>> Llamada(numeroDeEmisor: String, numeroDeRemitente: String, duracion: Integer)
+{abstract} +calcularCostoLlamada(): Real
++setNumeroDeEmisor(numeroDeEmisor: String)
++getNumeroDeRemitent(): String
++setNumeroDeRemitent(numeroDeRemitente: String)
++getDuracion(): Integer
++setDuracion(duracion: Integer)
+}
+
+class LlamadaNacional extends Llamada {
++<<create>> LlamadaNacional(numeroDeEmisor: String, numeroDeRemitente: String, duracion: Integer)
++calcularCostoLlamada(): Real
+}
+
+class LlamadaInternacional extends Llamada {
++<<create>> LlamadaInternacional(numeroDeEmisor: String, numeroDeRemitente: String, duracion: Integer)
++calcularCostoLlamada(): Real
+}
+
+abstract class Persoona {
+-nombre: String
+-telefono: String
++<<create>> Persoona(nombre: String, telefono: String)
+{abstract} +calcularDescuentoPersoona(costo: Real): Real
++getLlamadas(): Llamada[*]
++setLlamadas(llamadas: Llamada[*])
++getNombre(): String
++setNombre(nombre: String)
++getTelefono(): String
++setTelefono(telefono: String) 
++registrarLlamadaNacional(remitente: Persoona, duracion: Integer): Llamada
++registrarLlamadaInternacional(remitente: Persoona, duracion: Integer): Llamada
++calcularMontoTotalLlamadas(): Real
+}
+
+class PersoonaJuridica extends Persoona {
+-cuit: String
+-{static} descuentoJuridica = 0.15: Real
++<<create>> Persoona(nombre: String, telefono: String, cuit: String)
++getCuit(): String
++setCuit(cuit: String)
+{static} +getDescuentoJuridica(): Real
+{static} +setDescuentoJuridica(descuentoJuridica: Real)
++calcularDescuentoPersoona(costo: Real): Real 
+}
+
+class PersoonaFisica extends Persoona {
+-documento: String
+{static} -descuentoFisica = 0: Real
++<<create>> Persoona(nombre: String, telefono: String, documento: String)
++getDocumento(): String
++setDocumento(documento: String)
+{static} +getDescuentoFisica(): Real
+{static} +setDescuentoFisica(descuentoFisica: Real)
++calcularDescuentoPersoona(costo: Real): Real 
+}
+
+class PersoonaNull extends Persoona {
++calcularDescuentoPersoona(costo: Real): Real 
++calcularMontoTotalLlamadas(): Real
+}
+
+class Persoonal {
+-guiaTelefonica: String[*]
+
++agregarTelefono(telefono: String): Boolean
+-extraerUltimoTelefono(): String
++registrarUsuarioFisica(documento: String, nombre: String): Persoona
++registrarUsuarioJuridica(cuit: String, nombre: String): Persoona
++eliminarUsuario(usuario: Persoona): Boolean
++registrarLlamadaNacional(emisor: Persoona, remitente: Persoona, duracion: Integer): Llamada
++registrarLlamadaInternacional(emisor: Persoona, remitente: Persoona, duracion: Integer): Llamada
+-buscarPersoonaEnPersoonal(persona: Persoona): Persoona
++calcularMontoTotalLlamadas(persona: Persoona): Real
++cantidadDeUsuarios(): Integer
++existeUsuario(persona: Persoona): Boolean
++getPersonas(): Persoonas[*]
++setPersonas(personas: Persoonas[*])
++getGuiaTelefonica(): String[*]
++setGuiaTelefonica(guiaTelefonica: String[*])
+}
+
+Persoonal --> "0..*" Persoona : -personas
+Persoona --> "0..*" Llamada: -llamadas
+@enduml
+*/

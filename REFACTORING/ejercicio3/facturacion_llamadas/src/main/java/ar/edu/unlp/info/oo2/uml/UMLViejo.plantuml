@@ -1,0 +1,61 @@
+/*
+@startuml
+skinparam classAttributeIconSize 0
+
+class GuiaTelefonica {
++guia: String[*]
+}
+
+class Llamada {
+#tipoDeLlamada: String
+-emisor: String
+-remitente: String
++dur: Integer
++<<create>> Llamada()
++<<create>> Llamada(s: String, p: String, p2: String, p3: Persoona, dur: Integer)
++getTipoDeLlamada(): String
++setTipoDeLlamada(tipoDeLlamada: String) 
++setEmisor(q: String)
++getRemitente(): String
++setRemitente(remitente: String)
+}
+
+class Persoona {
++t: String
++nya: String
++tel: String
++cuit: String
++doc: String
++getLista1(): LLamada[*]
++setLista1(lista1: LLamada[*])
++getT(): String
++setT(t: String)
++geNya(): String
++setNya(nya: String)
++getTel(): String
++setTel(tel: String)
++getCuit(): String
++setCuit(cuit: String)
++getDoc(): String
++setDoc(doc: String)
+}
+
+class Persoonal {
+~{static} descuentoJur: Real
+~{static} descuentoFis: Real
++agregarTelefono(str: String): Boolean
++registrarUsuario(data: String, nombre: String, t: String): Persoona
++eliminarUsuario(p: Persoona): Boolean
++registrarLlamada(q: Persoona, q2: Persoona, t: String, d: Integer): Llamada
++calcularMontoTotalLlamadas(p: Persoona): Real
++cantidadDeUsuarios(): Integer
++existeUsuario(persona: Persoona): Boolean
+}
+
+Persoonal --> "0..*" Persoona : ~lista1
+Persoonal --> "0..*" Llamada : ~lista2
+Persoonal --> "1" GuiaTelefonica: ~lista3
+Persoona --> "1" Persoonal: +sis
+Persoona --> "0..*" Llamada: +lista1
+@enduml
+*/
